@@ -17,7 +17,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- UC强制全屏 -->
     <meta name="full-screen" content="yes">
-    <!-- UC应用模式 --> 
+    <!-- UC应用模式 -->
     <meta name="browsermode" content="application">
     <!-- QQ强制全屏 -->
     <meta name="x5-fullscreen" content="true">
@@ -80,10 +80,11 @@
         <section class="main_sec main_search">
             <div class="search_wrap">
                 <h2>超过<strong>十万视频</strong>任你搜</h2>
-                <form class="form" action="#" method="get" name="search" id="search_form" target="_blank">
-                    <input class="text" name="wd" type="text" placeholder="搜你感兴趣的词：姐妹、韩国美女...">
-                    <button class="fr"><span>搜一下</span></button>
-                </form>
+                <div class="form" action="" target="_blank">
+                    <input type="text" id="search_text" class="text" placeholder="网曝 | 小鸟酱 | 玩具酱">
+                    <button data-href target="_blank" rel="nofollow" id="srarch_href"
+                        class="btn fr"><span>搜一下</span></button>
+                </div>
                 <div class="tags" id="search_tags"></div>
             </div>
         </section>
@@ -136,7 +137,28 @@
         $('.main_hengfu').html(hengfu);
 
         // 搜索API输出
-        $('#search_form').attr('action', sousuo.sou);
+        $("#search_text").bind("input propertychange", function (event) {
+            if (!$("#search_text").val()) {
+                $('#srarch_href').attr('data-href', '');
+            } else {
+                $('#srarch_href').attr('data-href', sousuo.sou + $('#search_text').val());
+            }
+
+            $("#srarch_href").click(function () {
+                if ($("#search_text").val()) {
+                    window.open($('#srarch_href').attr('data-href'));
+                }
+            })
+
+            $("#search_text").keydown(function (event) {
+                if ($("#search_text").val()) {
+                    if (event.keyCode == 13) {
+                        window.open($('#srarch_href').attr('data-href'));
+                    }
+                }
+            });
+        });
+        // $('#search_form').attr('action', sousuo.sou);
         $('#search_tags').html(sousuo.tag);
 
         // 楼层链接输出
@@ -182,7 +204,7 @@
         for (var i = 0; i < mainPage.length; i++) {
             mainTopArr.push(mainPage.eq(i).offset().top - 80);
         }
-        
+
         $(window).scroll(function () {
             var scrollTop = $(this).scrollTop();
             var k;
@@ -195,7 +217,7 @@
         });
         nav.find("a[href^='#']").click(function (e) {
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $(this.hash).offset().top - 79}, 300);
+            $('html, body').animate({ scrollTop: $(this.hash).offset().top - 79 }, 300);
         });
 
         // 侧边栏显示隐藏
@@ -208,7 +230,7 @@
                 nav_btn.addClass('current');
                 aside.addClass('show');
                 zhezhao.addClass('show');
-            }else{
+            } else {
                 delClass();
             }
         });

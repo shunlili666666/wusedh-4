@@ -607,7 +607,7 @@ textarea {
   background: #3385ff;
 }
 
-.main_search .search_wrap .form button {
+.main_search .search_wrap .form .btn {
   position: relative;
   height: 100%;
   padding: 0 .16rem;
@@ -616,13 +616,13 @@ textarea {
   cursor: pointer;
 }
 
-.main_search .search_wrap .form button span {
+.main_search .search_wrap .form .btn span {
   position: relative;
   z-index: 2;
   font-size: .15rem;
 }
 
-.main_search .search_wrap .form button:after {
+.main_search .search_wrap .form .btn:after {
   content: '';
   display: block;
   position: absolute;
@@ -637,7 +637,7 @@ textarea {
   transition: opacity .2s ease-in;
 }
 
-.main_search .search_wrap .form button:hover:after {
+.main_search .search_wrap .form .btn:hover:after {
   opacity: 1;
 }
 
